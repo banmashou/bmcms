@@ -14,6 +14,7 @@ model User {
   id       Int      @id @default(autoincrement())
   name     String
   password String
+  secret   String?
   email    String?
   mobile   String?
   createAt DateTime @default(now())
@@ -26,8 +27,9 @@ model App {
   title    String
   content  String   @db.Text
   preview  String
+  is_free  Boolean  @default(true)
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
-  user     User     @relation(fields: [userId], references: [id])
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId   Int
 }
