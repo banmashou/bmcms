@@ -17,6 +17,7 @@ model User {
   secret   String?
   email    String?
   mobile   String?
+  avatar   String?
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
   App      App[]
