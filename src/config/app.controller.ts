@@ -1,12 +1,13 @@
-import { Controller, Get } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
+import { Controller, Get, Inject } from '@nestjs/common'
+import { ConfigService, ConfigType } from '@nestjs/config'
+import config from '../config'
 
 @Controller('config')
 export class AppController {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(@Inject(config.KEY) private conf: ConfigType<typeof config>) {}
 
   @Get()
   getHello() {
-    return this.configService.get('name')
+    return this.conf.copyright
   }
 }
