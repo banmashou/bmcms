@@ -1,8 +1,7 @@
 import { Global, Module } from '@nestjs/common'
-import { ConfigService } from './config.service'
 import { ConfigModule as BaseModule } from '@nestjs/config'
 import config from '../config'
-import { AppController } from './app.controller'
+import { ConfigService } from './config.service'
 
 @Global()
 @Module({
@@ -11,7 +10,8 @@ import { AppController } from './app.controller'
       load: [config],
     }),
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [ConfigService],
+  exports: [ConfigService],
 })
-export class ConfigModule {}
+export class CommonModule {}
