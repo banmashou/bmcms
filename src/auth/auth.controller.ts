@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { AuthService } from './auth.service'
 import { RegisterDto } from './dto/register.dto'
 import { LoginDto } from './dto/login.dto'
-import { AuthGuard } from '@nestjs/passport'
+import { CurrentUser } from './current-user.decorator'
+import { User } from '@prisma/client'
+import { Admin } from './admin.decorator'
 
 @Controller('auth')
 export class AuthController {
@@ -18,8 +20,8 @@ export class AuthController {
   }
 
   @Get('test')
-  @UseGuards(AuthGuard('jwt'))
-  test() {
-    return 'test'
+  @Admin()
+  test(@CurrentUser() user: User) {
+    return user
   }
 }
